@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('pelanggans', function (Blueprint $table) {
             $table->id();
+            $table->string('ID_PELANGGAN');
+            $table->string('NAMA');
+            $table->string('DOMISILI');
+            $table->enum('JENIS_KELAMIN', ['PRIA', 'WANITA'])->default('PRIA');
             $table->timestamps();
         });
     }
