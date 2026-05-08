@@ -17,6 +17,7 @@ Route::prefix('v1')->group(function () {
         Route::prefix('pelanggan')->group(function () {
             Route::get('/', [PelangganController::class, 'index']);
             Route::post('/', [PelangganController::class, 'store']);
+            Route::put('/{id}', [PelangganController::class, 'update']);
         });
     });
 });

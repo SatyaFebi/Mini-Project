@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\Master\PelangganResource;
 use App\Http\Services\Master\PelangganService;
 use App\Http\Requests\Master\StorePelangganRequest;
-// use App\Http\Requests\Master\UpdatePelangganRequest;
+use App\Http\Requests\Master\UpdatePelangganRequest;
 
 class PelangganController extends Controller
 {
@@ -33,5 +33,14 @@ class PelangganController extends Controller
                ->additional(['message' => 'Berhasil menambah pelanggan!'])
                ->response()
                ->setStatusCode(201);
+    }
+
+    public function update(UpdatePelangganRequest $request, $id)
+    {
+         $result = $this->pelangganService->updatePelanggan($id, $request->validated());
+         return (new PelangganResource($result))
+            ->additional(['message' => 'Berhasil mengupdate pelanggan!'])
+            ->response()
+            ->setStatusCode(200);
     }
 }

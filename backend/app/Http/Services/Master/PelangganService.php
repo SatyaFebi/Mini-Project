@@ -35,4 +35,13 @@ class PelangganService
     {
         return Pelanggan::create($data);
     }
+
+    public function updatePelanggan($id, array $data)
+    {
+        $result = Pelanggan::findOrFail($id);
+
+        $result->update($data);
+
+        return $result;
+    }
 }

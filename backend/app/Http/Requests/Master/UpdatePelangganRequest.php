@@ -16,7 +16,7 @@ class UpdatePelangganRequest extends FormRequest
         return [
             'NAMA' => 'nullable|string|max:255',
             'DOMISILI' => 'nullable|string|max:255',
-            'JENIS_KELAMIN' => 'nullable|in:L,P',
+            'JENIS_KELAMIN' => 'nullable|in:PRIA,WANITA',
         ];
     }
 }
