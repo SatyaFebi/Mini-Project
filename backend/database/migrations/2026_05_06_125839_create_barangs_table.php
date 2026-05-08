@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('KODE');
+            $table->string('KODE')->index();
             $table->string('NAMA');
-            $table->string('KATEGORI');
+            $table->string('KATEGORI')->index();
             $table->integer('HARGA');
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->index();
         });
     }
 
