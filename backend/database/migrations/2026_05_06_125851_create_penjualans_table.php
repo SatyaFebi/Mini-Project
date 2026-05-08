@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('penjualans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ID_NOTA')->constrained('item_penjualans')->cascadeOnDelete();
+            $table->string('ID_NOTA');
             $table->date('TGL');
             $table->foreignId('KODE_PELANGGAN')->constrained('pelanggans')->cascadeOnDelete();
             $table->integer('SUBTOTAL')->nullable();
