@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('KATEGORI');
             $table->integer('HARGA');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

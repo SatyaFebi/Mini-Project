@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('DOMISILI');
             $table->enum('JENIS_KELAMIN', ['PRIA', 'WANITA'])->default('PRIA');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
