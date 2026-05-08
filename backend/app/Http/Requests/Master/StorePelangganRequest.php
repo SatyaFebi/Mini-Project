@@ -17,7 +17,7 @@ class StorePelangganRequest extends FormRequest
             'ID_PELANGGAN' => 'required|string|unique:pelanggans,ID_PELANGGAN',
             'NAMA' => 'required|string|max:255',
             'DOMISILI' => 'required|string|max:255',
-            'JENIS_KELAMIN' => 'required|in:L,P',
+            'JENIS_KELAMIN' => 'required|in:PRIA,WANITA',
         ];
     }
 }

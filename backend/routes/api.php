@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\PelangganController;
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Master\PelangganController;
+use App\Http\Controllers\Api\Auth\AuthController;
 
 Route::prefix('v1')->group(function () {
     // Auth Routes
@@ -16,6 +16,7 @@ Route::prefix('v1')->group(function () {
         // Protected Resource Routes
         Route::prefix('pelanggan')->group(function () {
             Route::get('/', [PelangganController::class, 'index']);
+            Route::post('/', [PelangganController::class, 'store']);
         });
     });
 });
