@@ -32,7 +32,19 @@ export default function DashboardLayout({
   }, [isAuthenticated, isLoading, router]);
 
   if (isLoading) {
-    return <div className="flex h-screen items-center justify-center">Loading...</div>;
+     return <div className="flex h-screen items-center justify-center">
+        <svg className="mr-3 size-5 animate-spin ..." viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M12 22c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10zm0-18c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8z"
+          />
+          <path
+            fill="currentColor"
+            d="M19 12c0-3.866-3.134-7-7-7v4a3 3 0 0 0 3 3 3 3 0 0 0 3-3z"
+          />
+        </svg>
+        Loading...
+     </div>;
   }
 
   if (!isAuthenticated) {
