@@ -43,4 +43,27 @@ class PelangganController extends Controller
             ->response()
             ->setStatusCode(200);
     }
+
+    public function all()
+    {
+        $data = $this->pelangganService->getAll();
+        return PelangganResource::collection($data)
+            ->additional(['success' => true]);
+    }
+
+    public function show($id)
+    {
+        $result = $this->pelangganService->findById($id);
+        return (new PelangganResource($result))
+            ->additional(['success' => true]);
+    }
+
+    public function destroy($id)
+    {
+        $this->pelangganService->deletePelanggan($id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil menghapus pelanggan!'
+        ]);
+    }
 }

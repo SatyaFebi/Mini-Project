@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Master\PelangganController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Master\BarangController;
+use App\Http\Controllers\Api\Transaksi\PenjualanController;
 
 Route::prefix('v1')->group(function () {
     // Auth Routes
@@ -14,17 +15,16 @@ Route::prefix('v1')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/me', [AuthController::class, 'me']);
 
-        // Protected Resource Routes
-        Route::prefix('pelanggan')->group(function () {
-            Route::get('/', [PelangganController::class, 'index']);
-            Route::post('/', [PelangganController::class, 'store']);
-            Route::put('/{id}', [PelangganController::class, 'update']);
-        });
+         Route::prefix('master')->group(function() {
+         Route::get('pelanggan/all', [PelangganController::class, 'all']);
+         Route::apiResource('pelanggan', PelangganController::class);
 
-        Route::prefix('barang')->group(function () {
-            Route::get('/', [BarangController::class, 'index']);
-            Route::post('/', [BarangController::class, 'store']);
-            Route::put('/{id}', [BarangController::class, 'update']);
-        });
+         Route::get('barang/all', [BarangController::class, 'all']);
+         Route::apiResource('barang', BarangController::class);
+      });
+
+      Route::prefix('transaksi')->group(function () {
+         Route::apiResource('penjualan', PenjualanController::class);
+      });
     });
 });

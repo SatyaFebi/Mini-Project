@@ -17,4 +17,26 @@ class Pelanggan extends Model
       'DOMISILI',
       'JENIS_KELAMIN'
    ];
+
+   protected static function boot()
+   {
+       parent::boot();
+
+       static::creating(function ($model) {
+           $latest = static::orderBy('id', 'desc')->first();
+           $num = 1;
+           if ($latest) {
+               $parts = explode('-', $latest->ID_PELANGGAN);
+               if (count($parts) == 2) {
+                   $num = (int)$parts[1] + 1;
+               }
+           }
+           $model->ID_PELANGGAN = 'PLG-' . str_pad($num, 3, '0', STR_PAD_LEFT);
+       });
+   }
+
+   public function penjualans()
+   {
+       return $this->hasMany(Penjualan::class, 'KODE_PELANGGAN', 'ID_PELANGGAN');
+   }
 }

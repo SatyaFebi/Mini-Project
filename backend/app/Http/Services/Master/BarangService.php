@@ -15,7 +15,7 @@ class BarangService {
       if ($search) {
          $query->where(function ($q) use ($search) {
             $q->where('KODE', 'LIKE', '%' . $search . '%')
-              ->orWhere('NAME', 'LIKE', '%' . $search . '%');
+              ->orWhere('NAMA', 'LIKE', '%' . $search . '%');
          });
       }
 
@@ -25,5 +25,28 @@ class BarangService {
    public function storeBarang(array $data)
    {
       return Barang::create($data);
+   }
+
+   public function getAll()
+   {
+       return Barang::all();
+   }
+
+   public function findById($id)
+   {
+       return Barang::findOrFail($id);
+   }
+
+   public function updateBarang($id, array $data)
+   {
+       $result = Barang::findOrFail($id);
+       $result->update($data);
+       return $result;
+   }
+
+   public function deleteBarang($id)
+   {
+       $result = Barang::findOrFail($id);
+       return $result->delete();
    }
 }

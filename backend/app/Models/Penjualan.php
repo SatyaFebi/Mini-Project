@@ -15,11 +15,34 @@ class Penjualan extends Model
       'SUBTOTAL'
    ];
 
-   public function idNota() {
-      return $this->belongsTo(ItemPenjualan::class, 'ID_NOTA', 'id');
+   protected static function boot()
+   {
+       parent::boot();
+
+       static::creating(function ($model) {
+           $date = now()->format('Ymd');
+           $prefix = 'INV-' . $date . '-';
+           
+           $latest = static::where('ID_NOTA', 'LIKE', $prefix . '%')
+                           ->orderBy('id', 'desc')
+                           ->first();
+                           
+           $num = 1;
+           if ($latest) {
+               $parts = explode('-', $latest->ID_NOTA);
+               if (count($parts) == 3) {
+                   $num = (int)$parts[2] + 1;
+               }
+           }
+           $model->ID_NOTA = $prefix . str_pad($num, 3, '0', STR_PAD_LEFT);
+       });
    }
 
-   public function kodePelanggan() {
-      return $this->belongsTo(Pelanggan::class, 'KODE_PELANGGAN', 'id');
+   public function pelanggan() {
+      return $this->belongsTo(Pelanggan::class, 'KODE_PELANGGAN', 'ID_PELANGGAN');
+   }
+
+   public function items() {
+      return $this->hasMany(ItemPenjualan::class, 'NOTA', 'ID_NOTA');
    }
 }

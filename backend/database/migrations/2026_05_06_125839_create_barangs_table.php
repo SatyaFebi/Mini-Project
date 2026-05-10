@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('KODE')->index();
-            $table->string('NAMA');
+            $table->string('KODE')->unique()->index();
+            $table->string('NAMA')->index();
             $table->string('KATEGORI')->index();
             $table->integer('HARGA');
             $table->timestamps();

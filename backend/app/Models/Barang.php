@@ -17,4 +17,9 @@ class Barang extends Model
       'KATEGORI',
       'HARGA'
    ];
+
+   public function itemPenjualans()
+   {
+       return $this->hasMany(ItemPenjualan::class, 'KODE_BARANG', 'KODE');
+   }
 }

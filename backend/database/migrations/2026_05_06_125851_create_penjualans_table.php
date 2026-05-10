@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('penjualans', function (Blueprint $table) {
             $table->id();
-            $table->string('ID_NOTA')->index();
+            $table->string('ID_NOTA')->unique()->index();
             $table->date('TGL')->index();
-            $table->foreignId('KODE_PELANGGAN')->constrained('pelanggans')->cascadeOnDelete()->index();
+            $table->string('KODE_PELANGGAN')->index();
+            $table->foreign('KODE_PELANGGAN')->references('ID_PELANGGAN')->on('pelanggans')->cascadeOnDelete();
             $table->integer('SUBTOTAL')->nullable();
             $table->timestamps();
         });

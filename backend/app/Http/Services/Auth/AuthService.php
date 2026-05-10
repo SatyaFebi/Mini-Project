@@ -5,6 +5,7 @@ namespace App\Http\Services\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
@@ -19,6 +20,11 @@ class AuthService
             'password' => Hash::make($data['password']),
         ]);
 
+        Auth::guard('web')->login($user);
+        if (request()->hasSession()) {
+            request()->session()->regenerate();
+        }
+
         return $this->generateResponse($user);
     }
 
@@ -27,12 +33,15 @@ class AuthService
      */
     public function login(array $data)
     {
-        $user = User::where('email', $data['email'])->first();
-
-        if (!$user || !Hash::check($data['password'], $user->password)) {
+        if (!Auth::guard('web')->attempt($data)) {
             throw ValidationException::withMessages([
                 'email' => ['Kredensial yang diberikan salah.'],
             ]);
+        }
+
+        $user = Auth::guard('web')->user();
+        if (request()->hasSession()) {
+            request()->session()->regenerate();
         }
 
         return $this->generateResponse($user);
@@ -43,7 +52,16 @@ class AuthService
      */
     public function logout($user)
     {
-        return $user->currentAccessToken()->delete();
+        if ($user->currentAccessToken()) {
+            $user->currentAccessToken()->delete();
+        }
+
+        Auth::guard('web')->logout();
+        
+        if (request()->hasSession()) {
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+        }
     }
 
     /**

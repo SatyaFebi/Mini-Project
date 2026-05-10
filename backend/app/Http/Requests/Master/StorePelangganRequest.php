@@ -14,7 +14,6 @@ class StorePelangganRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ID_PELANGGAN' => 'required|string|unique:pelanggans,ID_PELANGGAN',
             'NAMA' => 'required|string|max:255',
             'DOMISILI' => 'required|string|max:255',
             'JENIS_KELAMIN' => 'required|in:PRIA,WANITA',

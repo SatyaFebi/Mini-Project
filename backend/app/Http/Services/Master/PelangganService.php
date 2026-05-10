@@ -44,4 +44,20 @@ class PelangganService
 
         return $result;
     }
+
+    public function getAll()
+    {
+        return Pelanggan::all();
+    }
+
+    public function findById($id)
+    {
+        return Pelanggan::findOrFail($id);
+    }
+
+    public function deletePelanggan($id)
+    {
+        $result = Pelanggan::findOrFail($id);
+        return $result->delete();
+    }
 }

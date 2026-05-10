@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('item_penjualans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('NOTA')->index()->constrained('penjualans')->cascadeOnDelete();
-            $table->foreignId('KODE_BARANG')->index()->constrained('barangs')->cascadeOnDelete();
+            $table->string('NOTA')->index();
+            $table->foreign('NOTA')->references('ID_NOTA')->on('penjualans')->cascadeOnDelete();
+            $table->string('KODE_BARANG')->index();
+            $table->foreign('KODE_BARANG')->references('KODE')->on('barangs')->cascadeOnDelete();
             $table->integer('Qty');
             $table->timestamps();
         });

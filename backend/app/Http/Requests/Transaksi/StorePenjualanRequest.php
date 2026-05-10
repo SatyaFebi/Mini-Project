@@ -14,11 +14,11 @@ class StorePenjualanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ID_PELANGGAN' => 'required|exists:pelanggans,ID_PELANGGAN',
-            'TGL' => 'required|date',
-            'items' => 'required|array|min:1',
-            'items.*.KODE' => 'required|string',
-            'items.*.QTY' => 'required|integer|min:1',
+           'tgl' => 'required|date',
+           'kode_pelanggan' => 'required|exists:pelanggans,ID_PELANGGAN',
+           'items' => 'required|array|min:1',
+           'items.*.kode_barang' => 'required|exists:barangs,KODE',
+           'items.*.qty' => 'required|integer|min:1'
         ];
     }
 }
