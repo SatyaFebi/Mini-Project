@@ -93,14 +93,14 @@ function POSContent() {
   return (
     <div className={`flex h-screen p-6 ${isCartVisible ? 'gap-6' : 'gap-0'} transition-all duration-300`}>
       {/* ═══ LEFT: Katalog ═══ */}
-      <div className="flex flex-1 flex-col min-w-0">
+      <div className="flex flex-1 flex-col min-w-0 px-5">
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/pelanggan">
+            {/* <Link href="/pelanggan">
               <Button variant="outline" size="icon" className="h-9 w-9">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
-            </Link>
+            </Link> */}
             <div>
               <h2 className="text-2xl font-bold">Point of Sale</h2>
               <p className="text-sm text-muted-foreground">{new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
