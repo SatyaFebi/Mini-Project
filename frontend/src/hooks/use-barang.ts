@@ -21,6 +21,7 @@ export function useCreateBarang() {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['barang'] });
+            queryClient.invalidateQueries({ queryKey: ['categories'] });
         },
     });
 }
@@ -34,6 +35,7 @@ export function useUpdateBarang() {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['barang'] });
+            queryClient.invalidateQueries({ queryKey: ['categories'] });
         },
     });
 }
@@ -58,5 +60,20 @@ export function useBarangAll() {
             const res = await api.get('/master/barang/all');
             return res.data;
         },
+    });
+}
+
+export function useCategories() {
+    return useQuery({
+        queryKey: ['categories'],
+        queryFn: async () => {
+            // Simulating fetch for categories based on backend validation rules
+            return new Promise<string[]>((resolve) => {
+                setTimeout(() => {
+                    resolve(['ATK', 'MASAK', 'RT', 'ELEKTRONIK', 'LAINNYA']);
+                }, 300);
+            });
+        },
+        staleTime: 1000 * 60 * 5, // Cache for 5 minutes
     });
 }

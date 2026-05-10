@@ -5,6 +5,7 @@ import { useAuth } from "@/lib/auth";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -35,28 +36,28 @@ export default function Header() {
       </div>
 
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button className="flex items-center gap-2 outline-none">
-            <Avatar className="h-8 w-8">
-              <AvatarFallback>
-                {user?.name?.charAt(0).toUpperCase() || 'U'}
-              </AvatarFallback>
-            </Avatar>
-            <span className="text-sm font-medium">{user?.name}</span>
-          </button>
+        <DropdownMenuTrigger className="flex items-center gap-2 outline-none">
+          <Avatar className="h-8 w-8">
+            <AvatarFallback>
+              {user?.name?.charAt(0).toUpperCase() || 'U'}
+            </AvatarFallback>
+          </Avatar>
+          <span className="text-sm font-medium">{user?.name}</span>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56">
-          <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem className="text-muted-foreground">
-            <User className="mr-2 h-4 w-4" />
-            <span>{user?.email}</span>
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => logout()} className="text-red-600">
-            <LogOut className="mr-2 h-4 w-4" />
-            <span>Keluar</span>
-          </DropdownMenuItem>
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="text-muted-foreground">
+              <User className="mr-2 h-4 w-4" />
+              <span>{user?.email}</span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => logout()} className="text-red-600">
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>Keluar</span>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>

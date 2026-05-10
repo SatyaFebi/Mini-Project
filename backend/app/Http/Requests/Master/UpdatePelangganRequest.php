@@ -14,9 +14,9 @@ class UpdatePelangganRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'NAMA' => 'nullable|string|max:255',
-            'DOMISILI' => 'nullable|string|max:255',
-            'JENIS_KELAMIN' => 'nullable|in:PRIA,WANITA',
+            'nama' => 'nullable|string|max:255',
+            'domisili' => 'nullable|string|max:255',
+            'jenis_kelamin' => 'nullable|in:PRIA,WANITA',
         ];
     }
 }

@@ -23,10 +23,10 @@ class StoreBarangRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'KODE' => 'required|string|max:255',
-            'NAMA' => 'required|string|max:255',
-            'KATEGORI' => 'required|in:ATK,MASAK,RT,ELEKTRONIK,LAINNYA',
-            'HARGA' => 'required|integer',
+            'kode' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
+            'kategori' => 'required|in:ATK,MASAK,RT,ELEKTRONIK,LAINNYA',
+            'harga' => 'required|integer',
         ];
     }
 }

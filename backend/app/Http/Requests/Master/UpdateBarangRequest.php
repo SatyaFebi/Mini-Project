@@ -23,10 +23,10 @@ class UpdateBarangRequest extends FormRequest
     public function rules(): array
     {
          return [
-            'KODE' => 'nullable|string|max:255',
-            'NAMA' => 'nullable|string|max:255',
-            'KATEGORI' => 'nullable|in:ATK,MASAK,RT,ELEKTRONIK,LAINNYA',
-            'HARGA' => 'nullable|integer',
+             'kode' => 'nullable|string|max:255',
+             'nama' => 'nullable|string|max:255',
+             'kategori' => 'nullable|in:ATK,MASAK,RT,ELEKTRONIK,LAINNYA',
+             'harga' => 'nullable|integer',
          ];
     }
 }

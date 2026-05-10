@@ -33,14 +33,22 @@ class PelangganService
 
     public function createPelanggan(array $data)
     {
-        return Pelanggan::create($data);
+        $mappedData = array_combine(
+            array_map('strtoupper', array_keys($data)),
+            array_values($data)
+        );
+        return Pelanggan::create($mappedData);
     }
 
     public function updatePelanggan($id, array $data)
     {
         $result = Pelanggan::findOrFail($id);
 
-        $result->update($data);
+        $mappedData = array_combine(
+            array_map('strtoupper', array_keys($data)),
+            array_values($data)
+        );
+        $result->update($mappedData);
 
         return $result;
     }

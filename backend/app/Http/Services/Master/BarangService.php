@@ -24,7 +24,11 @@ class BarangService {
 
    public function storeBarang(array $data)
    {
-      return Barang::create($data);
+      $mappedData = array_combine(
+          array_map('strtoupper', array_keys($data)),
+          array_values($data)
+      );
+      return Barang::create($mappedData);
    }
 
    public function getAll()
@@ -40,7 +44,11 @@ class BarangService {
    public function updateBarang($id, array $data)
    {
        $result = Barang::findOrFail($id);
-       $result->update($data);
+       $mappedData = array_combine(
+           array_map('strtoupper', array_keys($data)),
+           array_values($data)
+       );
+       $result->update($mappedData);
        return $result;
    }
 
