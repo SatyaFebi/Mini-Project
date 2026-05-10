@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Package, ShoppingCart, Users, Monitor } from "lucide-react"
+import { Package, ShoppingCart, Users, Monitor, ClipboardList } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -34,6 +34,11 @@ const items = [
     title: "Penjualan",
     url: "/penjualan",
     icon: ShoppingCart,
+  },
+  {
+    title: "Item Penjualan",
+    url: "/item-penjualan",
+    icon: ClipboardList,
   },
 ]
 

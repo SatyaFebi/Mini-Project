@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Master\PelangganController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Master\BarangController;
 use App\Http\Controllers\Api\Transaksi\PenjualanController;
+use App\Http\Controllers\Api\Transaksi\ItemPenjualanController;
 
 Route::prefix('v1')->group(function () {
     // Auth Routes
@@ -27,6 +28,7 @@ Route::prefix('v1')->group(function () {
 
       Route::prefix('transaksi')->group(function () {
          Route::apiResource('penjualan', PenjualanController::class)->except(['store']);
+         Route::get('item-penjualan', [ItemPenjualanController::class, 'index']);
       });
     });
 });
