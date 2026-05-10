@@ -1,0 +1,656 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Dokumentasi Mini Project",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/",
+            "description": "API Server Utama"
+        }
+    ],
+    "paths": {
+        "/api/v1/master/barang": {
+            "get": {
+                "tags": [
+                    "Master Barang"
+                ],
+                "summary": "Get list of barang with pagination and search",
+                "operationId": "1047908d14dc4dbfffc0b7e8078a98d3",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search by kode or nama",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Master Barang"
+                ],
+                "summary": "Create a new barang",
+                "operationId": "d583d751c96ec875651c69a0c9cf46bc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "kode",
+                                    "nama",
+                                    "kategori",
+                                    "harga"
+                                ],
+                                "properties": {
+                                    "kode": {
+                                        "type": "string",
+                                        "example": "B001"
+                                    },
+                                    "nama": {
+                                        "type": "string",
+                                        "example": "Buku Tulis"
+                                    },
+                                    "kategori": {
+                                        "type": "string",
+                                        "example": "ATK"
+                                    },
+                                    "harga": {
+                                        "type": "integer",
+                                        "example": 15000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Barang berhasil ditambahkan"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                }
+            }
+        },
+        "/api/v1/master/barang/all": {
+            "get": {
+                "tags": [
+                    "Master Barang"
+                ],
+                "summary": "Get all barang without pagination",
+                "operationId": "e2f51c7487b71e678191bcd10edaf896",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/api/v1/master/barang/{id}": {
+            "get": {
+                "tags": [
+                    "Master Barang"
+                ],
+                "summary": "Get a single barang by ID",
+                "operationId": "349552af026fda2c43377dfff23643e2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of barang",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Barang not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Master Barang"
+                ],
+                "summary": "Update an existing barang",
+                "operationId": "b2dc727f0f999e5428049465f4bf999b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of barang",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "kode": {
+                                        "type": "string",
+                                        "example": "B001"
+                                    },
+                                    "nama": {
+                                        "type": "string",
+                                        "example": "Buku Tulis Updated"
+                                    },
+                                    "kategori": {
+                                        "type": "string",
+                                        "example": "ATK"
+                                    },
+                                    "harga": {
+                                        "type": "integer",
+                                        "example": 20000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Barang berhasil diupdate"
+                    },
+                    "404": {
+                        "description": "Barang not found"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Master Barang"
+                ],
+                "summary": "Delete a barang",
+                "operationId": "85a19b22c8733613bcb12fe5f2b57681",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of barang",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Barang berhasil dihapus"
+                    },
+                    "404": {
+                        "description": "Barang not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/master/pelanggan": {
+            "get": {
+                "tags": [
+                    "Master Pelanggan"
+                ],
+                "summary": "Get list of pelanggan with pagination and search",
+                "description": "Get list of pelanggan.",
+                "operationId": "5568a3978135865a1181e05d3a001991",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search by nama or ID",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Master Pelanggan"
+                ],
+                "summary": "Create a new pelanggan",
+                "operationId": "1e16e65f50d54ad78a0d31c80f3a9771",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nama",
+                                    "domisili",
+                                    "jenis_kelamin"
+                                ],
+                                "properties": {
+                                    "nama": {
+                                        "type": "string",
+                                        "example": "Budi Santoso"
+                                    },
+                                    "domisili": {
+                                        "type": "string",
+                                        "example": "Jakarta"
+                                    },
+                                    "jenis_kelamin": {
+                                        "type": "string",
+                                        "example": "PRIA",
+                                        "enum": [
+                                            "PRIA",
+                                            "WANITA"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil menambah pelanggan"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                }
+            }
+        },
+        "/api/v1/master/pelanggan/{id}": {
+            "get": {
+                "tags": [
+                    "Master Pelanggan"
+                ],
+                "summary": "Get a single pelanggan by ID",
+                "operationId": "2730d5f77daa083c325342a2b167f564",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of pelanggan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Pelanggan not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Master Pelanggan"
+                ],
+                "summary": "Update an existing pelanggan",
+                "operationId": "07fdad0485f5ac01a25f4b76bbb9c23a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of pelanggan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nama": {
+                                        "type": "string",
+                                        "example": "Budi Santoso Updated"
+                                    },
+                                    "domisili": {
+                                        "type": "string",
+                                        "example": "Bandung"
+                                    },
+                                    "jenis_kelamin": {
+                                        "type": "string",
+                                        "example": "PRIA",
+                                        "enum": [
+                                            "PRIA",
+                                            "WANITA"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mengupdate pelanggan"
+                    },
+                    "404": {
+                        "description": "Pelanggan not found"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Master Pelanggan"
+                ],
+                "summary": "Delete a pelanggan",
+                "operationId": "c5945e6e1a16d158b8787403466c1aac",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of pelanggan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil menghapus pelanggan"
+                    },
+                    "404": {
+                        "description": "Pelanggan not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/master/pelanggan/all": {
+            "get": {
+                "tags": [
+                    "Master Pelanggan"
+                ],
+                "summary": "Get all pelanggan without pagination",
+                "operationId": "908ca5b0cda563b33f73c579f402e780",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/api/v1/transaksi/penjualan": {
+            "get": {
+                "tags": [
+                    "Transaksi Penjualan"
+                ],
+                "summary": "Get list of penjualan with pagination and search",
+                "operationId": "c0b7f8c2d006c01f336cbbe5db91b57d",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search by ID Nota or Kode Pelanggan",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Transaksi Penjualan"
+                ],
+                "summary": "Create a new penjualan transaction",
+                "operationId": "d8c7c1ca56b05f796402db3410d311c1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "tgl",
+                                    "kode_pelanggan",
+                                    "items"
+                                ],
+                                "properties": {
+                                    "tgl": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2026-05-10"
+                                    },
+                                    "kode_pelanggan": {
+                                        "type": "string",
+                                        "example": "PLG-001"
+                                    },
+                                    "items": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "kode_barang": {
+                                                    "type": "string",
+                                                    "example": "B001"
+                                                },
+                                                "qty": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil menambahkan data penjualan"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                }
+            }
+        },
+        "/api/v1/transaksi/penjualan/{id}": {
+            "get": {
+                "tags": [
+                    "Transaksi Penjualan"
+                ],
+                "summary": "Get detail of a penjualan transaction",
+                "operationId": "a17244708d7df834fce7a0e5a27eda9f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of penjualan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Penjualan not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Transaksi Penjualan"
+                ],
+                "summary": "Update an existing penjualan transaction",
+                "operationId": "c900965f21faad31729454d5f2319b0f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of penjualan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "tgl": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2026-05-11"
+                                    },
+                                    "kode_pelanggan": {
+                                        "type": "string",
+                                        "example": "PLG-001"
+                                    },
+                                    "items": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "kode_barang": {
+                                                    "type": "string",
+                                                    "example": "B001"
+                                                },
+                                                "qty": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mengubah data penjualan"
+                    },
+                    "404": {
+                        "description": "Penjualan not found"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Transaksi Penjualan"
+                ],
+                "summary": "Delete a penjualan transaction",
+                "operationId": "3966fbb5edd4a877100aa74a3e40e252",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of penjualan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil menghapus data penjualan"
+                    },
+                    "404": {
+                        "description": "Penjualan not found"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Master Barang",
+            "description": "Master Barang"
+        },
+        {
+            "name": "Master Pelanggan",
+            "description": "Master Pelanggan"
+        },
+        {
+            "name": "Transaksi Penjualan",
+            "description": "Transaksi Penjualan"
+        }
+    ]
+}
