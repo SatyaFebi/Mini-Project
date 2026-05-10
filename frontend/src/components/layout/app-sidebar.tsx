@@ -10,11 +10,16 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Package, ShoppingCart, Users } from "lucide-react"
+import { Package, ShoppingCart, Users, Monitor } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 const items = [
+  {
+    title: "Point of Sale",
+    url: "/pos",
+    icon: Monitor,
+  },
   {
     title: "Pelanggan",
     url: "/pelanggan",

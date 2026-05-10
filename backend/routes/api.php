@@ -11,20 +11,22 @@ Route::prefix('v1')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
 
+    // Public POS Routes
+    Route::get('master/pelanggan/all', [PelangganController::class, 'all']);
+    Route::get('master/barang/all', [BarangController::class, 'all']);
+    Route::post('transaksi/penjualan', [PenjualanController::class, 'store']);
+
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/me', [AuthController::class, 'me']);
 
          Route::prefix('master')->group(function() {
-         Route::get('pelanggan/all', [PelangganController::class, 'all']);
          Route::apiResource('pelanggan', PelangganController::class);
-
-         Route::get('barang/all', [BarangController::class, 'all']);
          Route::apiResource('barang', BarangController::class);
       });
 
       Route::prefix('transaksi')->group(function () {
-         Route::apiResource('penjualan', PenjualanController::class);
+         Route::apiResource('penjualan', PenjualanController::class)->except(['store']);
       });
     });
 });

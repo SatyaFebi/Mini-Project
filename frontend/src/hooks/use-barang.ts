@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '../lib/api';
-import { Barang } from '../lib/types';
+// import { Barang } from '../lib/types';
 
 export function useBarang(params: any) {
     return useQuery({
