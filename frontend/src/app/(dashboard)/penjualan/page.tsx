@@ -186,7 +186,16 @@ export default function PenjualanPage() {
               data?.data?.map((item: Penjualan) => (
                 <TableRow key={item.id}>
                   <TableCell>{item.id_nota}</TableCell>
-                  <TableCell>{new Date(item.tgl).toLocaleDateString('id-ID')}</TableCell>
+                  <TableCell>
+                    {item.tgl 
+                      ? (() => {
+                          const datePart = item.tgl.split('T')[0];
+                          const [year, month, day] = datePart.split('-');
+                          const bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+                          return year && month && day ? `${day} ${bulan[parseInt(month, 10) - 1]} ${year}` : datePart;
+                        })()
+                      : '-'}
+                  </TableCell>
                   <TableCell>{item.pelanggan?.nama || item.kode_pelanggan}</TableCell>
                   <TableCell>{formatCurrency(item.subtotal)}</TableCell>
                   <TableCell className="text-right space-x-2">
@@ -201,7 +210,7 @@ export default function PenjualanPage() {
       </div>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="w-full sm:max-w-2xl md:max-w-3xl max-h-[90vh] overflow-y-auto overflow-x-hidden">
           <DialogHeader>
             <DialogTitle>{selectedPenjualan ? 'Edit Penjualan' : 'Tambah Penjualan'}</DialogTitle>
             <DialogDescription>
@@ -210,7 +219,7 @@ export default function PenjualanPage() {
           </DialogHeader>
           <form onSubmit={handleSubmit}>
             <div className="space-y-4 py-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="tgl">Tanggal</Label>
                   <Input
@@ -230,7 +239,7 @@ export default function PenjualanPage() {
                     <SelectTrigger>
                       <SelectValue placeholder="Pilih Pelanggan" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="w-[var(--radix-select-trigger-width)]">
                       {pelanggans?.data?.map((p: Pelanggan) => (
                         <SelectItem key={p.id_pelanggan} value={p.id_pelanggan}>
                           {p.nama} ({p.id_pelanggan})
@@ -249,10 +258,10 @@ export default function PenjualanPage() {
                   </Button>
                 </div>
 
-                <div className="border rounded-md p-2 space-y-2">
+                <div className="border rounded-md p-2 space-y-2 overflow-x-auto">
                   {formData.items.map((item, index) => (
-                    <div key={index} className="grid grid-cols-12 gap-2 items-center">
-                      <div className="col-span-6">
+                    <div key={index} className="flex items-center gap-3 min-w-[450px]">
+                      <div className="flex-1 min-w-[150px]">
                         <Select
                           value={item.kode_barang}
                           onValueChange={(value) => handleItemChange(index, 'kode_barang', value)}
@@ -260,7 +269,7 @@ export default function PenjualanPage() {
                           <SelectTrigger>
                             <SelectValue placeholder="Pilih Barang" />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="w-[var(--radix-select-trigger-width)]">
                             {barangs?.data?.map((b: Barang) => (
                               <SelectItem key={b.kode} value={b.kode}>
                                 {b.nama} ({formatCurrency(b.harga)})
@@ -269,7 +278,7 @@ export default function PenjualanPage() {
                           </SelectContent>
                         </Select>
                       </div>
-                      <div className="col-span-3">
+                      <div className="w-16">
                         <Input
                           type="number"
                           placeholder="Qty"
@@ -277,12 +286,13 @@ export default function PenjualanPage() {
                           onChange={(e) => handleItemChange(index, 'qty', parseInt(e.target.value) || 1)}
                           min={1}
                           required
+                          className="text-center"
                         />
                       </div>
-                      <div className="col-span-2 text-sm font-medium">
+                      <div className="w-36 text-sm font-medium text-right">
                         {formatCurrency(getBarangPrice(item.kode_barang) * item.qty)}
                       </div>
-                      <div className="col-span-1 text-right">
+                      <div>
                         <Button
                           type="button"
                           variant="ghost"
