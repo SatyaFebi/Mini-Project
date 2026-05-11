@@ -12,7 +12,8 @@ class PenjualanService {
       $perPage = $params['per_page'] ?? 10;
       $search = $params['search'] ?? null;
 
-      $query = Penjualan::with(['pelanggan', 'items.barang']);
+      $query = Penjualan::with(['pelanggan', 'items.barang'])
+         ->orderBy('id', 'desc');
 
       if ($search) {
          $query->where(function ($q) use ($search) {

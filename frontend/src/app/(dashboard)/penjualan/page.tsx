@@ -209,6 +209,32 @@ export default function PenjualanPage() {
         </Table>
       </div>
 
+      {data?.meta && (
+        <div className="flex items-center justify-between mt-4">
+          <div className="text-sm text-muted-foreground">
+            Menampilkan {data.meta.from} - {data.meta.to} dari {data.meta.total} data
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={page === 1}
+              onClick={() => setPage(page - 1)}
+            >
+              Sebelumnya
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={page === data.meta.last_page}
+              onClick={() => setPage(page + 1)}
+            >
+              Selanjutnya
+            </Button>
+          </div>
+        </div>
+      )}
+
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="w-full sm:max-w-2xl md:max-w-3xl max-h-[90vh] overflow-y-auto overflow-x-hidden">
           <DialogHeader>
