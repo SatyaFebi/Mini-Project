@@ -5,6 +5,7 @@ namespace App\Http\Resources\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Master\BarangResource;
+use Carbon\Carbon;
 
 class ItemPenjualanResource extends JsonResource
 {
@@ -22,10 +23,16 @@ class ItemPenjualanResource extends JsonResource
             'subtotal_item' => $harga * $this->Qty,
             'penjualan' => $this->when($this->relationLoaded('penjualan'), function () {
                 $penjualan = $this->penjualan;
+                $carbonDate = Carbon::parse($penjualan->TGL)->timezone('Asia/Jakarta');
+                $bulan = [
+                    1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+                ];
+                
                 return [
                     'id' => $penjualan->id,
                     'id_nota' => $penjualan->ID_NOTA,
-                    'tgl' => $penjualan->TGL,
+                    'tgl' => $carbonDate->format('d') . ' ' . $bulan[$carbonDate->month] . ' ' . $carbonDate->format('Y'),
                     'subtotal' => $penjualan->SUBTOTAL,
                     'pelanggan' => $penjualan->relationLoaded('pelanggan') && $penjualan->pelanggan ? [
                         'id_pelanggan' => $penjualan->pelanggan->ID_PELANGGAN,

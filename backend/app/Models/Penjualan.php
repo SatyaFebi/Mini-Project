@@ -20,8 +20,7 @@ class Penjualan extends Model
        parent::boot();
 
        static::creating(function ($model) {
-           $date = now()->format('Ymd');
-           $prefix = 'INV-' . $date . '-';
+           $prefix = 'NOTA_';
            
            $latest = static::where('ID_NOTA', 'LIKE', $prefix . '%')
                            ->orderBy('id', 'desc')
@@ -29,12 +28,12 @@ class Penjualan extends Model
                            
            $num = 1;
            if ($latest) {
-               $parts = explode('-', $latest->ID_NOTA);
-               if (count($parts) == 3) {
-                   $num = (int)$parts[2] + 1;
+               $parts = explode('_', $latest->ID_NOTA);
+               if (count($parts) == 2) {
+                   $num = (int)$parts[1] + 1;
                }
            }
-           $model->ID_NOTA = $prefix . str_pad($num, 3, '0', STR_PAD_LEFT);
+           $model->ID_NOTA = $prefix . $num;
        });
    }
 

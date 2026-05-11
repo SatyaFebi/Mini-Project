@@ -114,7 +114,7 @@ export default function ItemPenjualanPage() {
               data?.data?.map((item: any) => (
                 <TableRow key={item.id}>
                   <TableCell className="font-mono text-sm">{item.penjualan?.id_nota ?? item.nota}</TableCell>
-                  <TableCell>{item.penjualan?.tgl ? new Date(item.penjualan.tgl).toLocaleDateString('id-ID') : '-'}</TableCell>
+                  <TableCell>{item.penjualan?.tgl ?? '-'}</TableCell>
                   <TableCell>{item.penjualan?.pelanggan?.nama ?? '-'}</TableCell>
                   <TableCell>{item.barang?.nama ?? item.kode_barang}</TableCell>
                   <TableCell className="text-right">{item.qty}</TableCell>
