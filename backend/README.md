@@ -1,59 +1,184 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Backend — Laravel REST API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Mini Project bagian backend yang dibangun dengan Laravel 12.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tech Stack
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Framework**: Laravel 12
+- **PHP**: >= 8.2
+- **Database**: MySQL
+- **Authentication**: Laravel Sanctum (token-based, HttpOnly cookie)
+- **API Docs**: L5-Swagger (OpenAPI 3.0)
+- **Testing**: PestPHP
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Struktur Direktori
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+```
+backend/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/Api/
+│   │   │   ├── Auth/           # AuthController (login, register, logout, me)
+│   │   │   ├── Master/         # PelangganController, BarangController
+│   │   │   └── Transaksi/      # PenjualanController, ItemPenjualanController
+│   │   ├── Requests/           # Form Request validation
+│   │   │   ├── Master/
+│   │   │   └── Transaksi/
+│   │   ├── Resources/          # API Resource transformers
+│   │   │   ├── Master/
+│   │   │   └── Transaksi/
+│   │   ├── Services/           # Business logic layer
+│   │   │   ├── Master/
+│   │   │   └── Transaksi/
+│   │   └── Swagger.php         # Global OpenAPI info & server config
+│   └── Models/
+│       ├── Pelanggan.php
+│       ├── Barang.php
+│       ├── Penjualan.php
+│       ├── ItemPenjualan.php
+│       └── User.php
+├── database/
+│   ├── migrations/
+│   └── seeders/
+│       └── DataSeeder.php      # Sample data (10 pelanggan, 10 barang, 10 nota)
+└── routes/
+    └── api.php
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Setup
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+cp .env.example .env
 
-### Premium Partners
+# Isi konfigurasi database di .env
+# DB_DATABASE=nama_database
+# DB_USERNAME=root
+# DB_PASSWORD=
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+composer install
+php artisan key:generate
+php artisan migrate --seed
+php artisan l5-swagger:generate
+php artisan serve
+```
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Environment Variables
 
-## Code of Conduct
+| Variable | Deskripsi | Default |
+|----------|-----------|---------|
+| `APP_URL` | URL aplikasi backend | `http://localhost` |
+| `DB_CONNECTION` | Driver database | `mysql` |
+| `DB_HOST` | Host database | `127.0.0.1` |
+| `DB_PORT` | Port database | `3306` |
+| `DB_DATABASE` | Nama database | `backend` |
+| `DB_USERNAME` | Username database | `root` |
+| `DB_PASSWORD` | Password database | _(kosong)_ |
+| `SANCTUM_STATEFUL_DOMAINS` | Domain frontend yang diizinkan | `localhost:3000` |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## API Endpoints
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Base URL: `/api/v1`
 
-## License
+### Auth
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+| Method | Endpoint | Akses | Deskripsi |
+|--------|----------|-------|-----------|
+| `POST` | `/register` | Public | Register user baru |
+| `POST` | `/login` | Public | Login, mengembalikan token |
+| `POST` | `/logout` | Auth | Logout, hapus token |
+| `GET` | `/me` | Auth | Data user yang sedang login |
+
+### Master — Pelanggan
+
+| Method | Endpoint | Akses | Deskripsi |
+|--------|----------|-------|-----------|
+| `GET` | `/master/pelanggan` | Auth | List pelanggan (paginated, searchable) |
+| `GET` | `/master/pelanggan/all` | Public | Semua pelanggan (tanpa pagination) |
+| `POST` | `/master/pelanggan` | Auth | Tambah pelanggan (ID auto-generate: `PELANGGAN_N`) |
+| `PUT` | `/master/pelanggan/{id}` | Auth | Update pelanggan |
+| `DELETE` | `/master/pelanggan/{id}` | Auth | Hapus pelanggan (soft delete) |
+
+### Master — Barang
+
+| Method | Endpoint | Akses | Deskripsi |
+|--------|----------|-------|-----------|
+| `GET` | `/master/barang` | Auth | List barang (paginated, searchable) |
+| `GET` | `/master/barang/all` | Public | Semua barang (tanpa pagination) |
+| `POST` | `/master/barang` | Auth | Tambah barang |
+| `PUT` | `/master/barang/{id}` | Auth | Update barang |
+| `DELETE` | `/master/barang/{id}` | Auth | Hapus barang |
+
+### Transaksi — Penjualan
+
+| Method | Endpoint | Akses | Deskripsi |
+|--------|----------|-------|-----------|
+| `GET` | `/transaksi/penjualan` | Auth | List penjualan (paginated, terbaru di atas) |
+| `POST` | `/transaksi/penjualan` | Public | Buat transaksi baru (untuk POS guest) |
+| `PUT` | `/transaksi/penjualan/{id}` | Auth | Update transaksi |
+| `DELETE` | `/transaksi/penjualan/{id}` | Auth | Hapus transaksi |
+
+### Transaksi — Item Penjualan
+
+| Method | Endpoint | Akses | Deskripsi |
+|--------|----------|-------|-----------|
+| `GET` | `/transaksi/item-penjualan` | Auth | List item (paginated, filter: search, date_from, date_to) |
+
+---
+
+## Database Schema
+
+```
+pelanggans
+  id, ID_PELANGGAN (PK string), NAMA, DOMISILI, JENIS_KELAMIN, deleted_at
+
+barangs
+  id, KODE (PK string), NAMA, KATEGORI, HARGA
+
+penjualans
+  id, ID_NOTA (unique), TGL, KODE_PELANGGAN (FK), SUBTOTAL
+
+item_penjualans
+  id, NOTA (FK → ID_NOTA), KODE_BARANG (FK), Qty
+```
+
+---
+
+## Auto-generated IDs
+
+| Model | Format | Contoh |
+|-------|--------|--------|
+| `Pelanggan` | `PELANGGAN_N` | `PELANGGAN_11` |
+| `Penjualan` | `NOTA_N` | `NOTA_11` |
+
+Keduanya di-generate otomatis via event `creating` di masing-masing Model.
+
+---
+
+## API Documentation (Swagger)
+
+```bash
+# Generate ulang docs setelah ada perubahan anotasi
+php artisan l5-swagger:generate
+```
+
+Akses Swagger UI: `http://localhost:8000/api/documentation`
+
+---
+
+## Testing
+
+```bash
+php artisan test
+# atau
+./vendor/bin/pest
+```
