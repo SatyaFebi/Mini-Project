@@ -46,7 +46,7 @@ class PenjualanController extends Controller
                required: ["tgl", "kode_pelanggan", "items"],
                properties: [
                    new OA\Property(property: "tgl", type: "string", format: "date", example: "2026-05-10"),
-                   new OA\Property(property: "kode_pelanggan", type: "string", example: "PLG-001"),
+                   new OA\Property(property: "kode_pelanggan", type: "string", example: "PELANGGAN_1"),
                    new OA\Property(
                        property: "items", 
                        type: "array", 
@@ -87,7 +87,7 @@ class PenjualanController extends Controller
            content: new OA\JsonContent(
                properties: [
                    new OA\Property(property: "tgl", type: "string", format: "date", example: "2026-05-11"),
-                   new OA\Property(property: "kode_pelanggan", type: "string", example: "PLG-001"),
+                   new OA\Property(property: "kode_pelanggan", type: "string", example: "PELANGGAN_1"),
                    new OA\Property(
                        property: "items", 
                        type: "array", 

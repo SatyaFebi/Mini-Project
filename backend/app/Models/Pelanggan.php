@@ -26,12 +26,12 @@ class Pelanggan extends Model
            $latest = static::orderBy('id', 'desc')->first();
            $num = 1;
            if ($latest) {
-               $parts = explode('-', $latest->ID_PELANGGAN);
+               $parts = explode('_', $latest->ID_PELANGGAN);
                if (count($parts) == 2) {
                    $num = (int)$parts[1] + 1;
                }
            }
-           $model->ID_PELANGGAN = 'PLG-' . str_pad($num, 3, '0', STR_PAD_LEFT);
+           $model->ID_PELANGGAN = 'PELANGGAN_' . $num;
        });
    }
 
