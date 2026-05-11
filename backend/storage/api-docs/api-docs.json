@@ -427,6 +427,169 @@
                 }
             }
         },
+        "/api/v1/transaksi/item-penjualan": {
+            "get": {
+                "tags": [
+                    "Transaksi Item Penjualan"
+                ],
+                "summary": "Get list of item penjualan with pagination, search, and date filter",
+                "operationId": "2ba2491fe1324a680b43ea2bee31aaa2",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search by nota, kode barang, nama barang, or nama pelanggan",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "date_from",
+                        "in": "query",
+                        "description": "Filter from date (format: YYYY-MM-DD)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "date_to",
+                        "in": "query",
+                        "description": "Filter to date (format: YYYY-MM-DD)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Items per page (default: 10)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mengambil data item penjualan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "nota": {
+                                                        "type": "string",
+                                                        "example": "NOTA_1"
+                                                    },
+                                                    "kode_barang": {
+                                                        "type": "string",
+                                                        "example": "BRG_1"
+                                                    },
+                                                    "qty": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "subtotal_item": {
+                                                        "type": "number",
+                                                        "example": 30000
+                                                    },
+                                                    "barang": {
+                                                        "properties": {
+                                                            "kode": {
+                                                                "type": "string",
+                                                                "example": "BRG_1"
+                                                            },
+                                                            "nama": {
+                                                                "type": "string",
+                                                                "example": "PEN"
+                                                            },
+                                                            "harga": {
+                                                                "type": "number",
+                                                                "example": 15000
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "penjualan": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "id_nota": {
+                                                                "type": "string",
+                                                                "example": "NOTA_1"
+                                                            },
+                                                            "tgl": {
+                                                                "type": "string",
+                                                                "example": "01 Januari 2018"
+                                                            },
+                                                            "subtotal": {
+                                                                "type": "number",
+                                                                "example": 50000
+                                                            },
+                                                            "pelanggan": {
+                                                                "properties": {
+                                                                    "id_pelanggan": {
+                                                                        "type": "string",
+                                                                        "example": "PELANGGAN_1"
+                                                                    },
+                                                                    "nama": {
+                                                                        "type": "string",
+                                                                        "example": "ANDI"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil mengambil data item penjualan"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/v1/transaksi/penjualan": {
             "get": {
                 "tags": [
@@ -484,7 +647,7 @@
                                     },
                                     "kode_pelanggan": {
                                         "type": "string",
-                                        "example": "PLG-001"
+                                        "example": "PELANGGAN_1"
                                     },
                                     "items": {
                                         "type": "array",
@@ -575,7 +738,7 @@
                                     },
                                     "kode_pelanggan": {
                                         "type": "string",
-                                        "example": "PLG-001"
+                                        "example": "PELANGGAN_1"
                                     },
                                     "items": {
                                         "type": "array",
@@ -647,6 +810,10 @@
         {
             "name": "Master Pelanggan",
             "description": "Master Pelanggan"
+        },
+        {
+            "name": "Transaksi Item Penjualan",
+            "description": "Transaksi Item Penjualan"
         },
         {
             "name": "Transaksi Penjualan",
