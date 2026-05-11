@@ -13,16 +13,16 @@ class DataSeeder extends Seeder
     public function run(): void
     {
         $pelanggans = [
-            ['ID_PELANGGAN' => 'PELANGAN_1', 'NAMA' => 'ANDI', 'DOMISILI' => 'JAK-UT', 'JENIS_KELAMIN' => 'PRIA'],
-            ['ID_PELANGGAN' => 'PELANGAN_2', 'NAMA' => 'BUDI', 'DOMISILI' => 'JAK-BAR', 'JENIS_KELAMIN' => 'PRIA'],
-            ['ID_PELANGGAN' => 'PELANGAN_3', 'NAMA' => 'JOHAN', 'DOMISILI' => 'JAK-SEL', 'JENIS_KELAMIN' => 'PRIA'],
-            ['ID_PELANGGAN' => 'PELANGAN_4', 'NAMA' => 'SINTHA', 'DOMISILI' => 'JAK-TIM', 'JENIS_KELAMIN' => 'WANITA'],
-            ['ID_PELANGGAN' => 'PELANGAN_5', 'NAMA' => 'ANTO', 'DOMISILI' => 'JAK-UT', 'JENIS_KELAMIN' => 'PRIA'],
-            ['ID_PELANGGAN' => 'PELANGAN_6', 'NAMA' => 'BUJANG', 'DOMISILI' => 'JAK-BAR', 'JENIS_KELAMIN' => 'PRIA'],
-            ['ID_PELANGGAN' => 'PELANGAN_7', 'NAMA' => 'JOWAN', 'DOMISILI' => 'JAK-SEL', 'JENIS_KELAMIN' => 'PRIA'],
-            ['ID_PELANGGAN' => 'PELANGAN_8', 'NAMA' => 'SINTIA', 'DOMISILI' => 'JAK-TIM', 'JENIS_KELAMIN' => 'WANITA'],
-            ['ID_PELANGGAN' => 'PELANGAN_9', 'NAMA' => 'BUTET', 'DOMISILI' => 'JAK-BAR', 'JENIS_KELAMIN' => 'WANITA'],
-            ['ID_PELANGGAN' => 'PELANGAN_10', 'NAMA' => 'JONNY', 'DOMISILI' => 'JAK-SEL', 'JENIS_KELAMIN' => 'WANITA'],
+            ['ID_PELANGGAN' => 'PELANGGAN_1', 'NAMA' => 'ANDI', 'DOMISILI' => 'JAK-UT', 'JENIS_KELAMIN' => 'PRIA'],
+            ['ID_PELANGGAN' => 'PELANGGAN_2', 'NAMA' => 'BUDI', 'DOMISILI' => 'JAK-BAR', 'JENIS_KELAMIN' => 'PRIA'],
+            ['ID_PELANGGAN' => 'PELANGGAN_3', 'NAMA' => 'JOHAN', 'DOMISILI' => 'JAK-SEL', 'JENIS_KELAMIN' => 'PRIA'],
+            ['ID_PELANGGAN' => 'PELANGGAN_4', 'NAMA' => 'SINTHA', 'DOMISILI' => 'JAK-TIM', 'JENIS_KELAMIN' => 'WANITA'],
+            ['ID_PELANGGAN' => 'PELANGGAN_5', 'NAMA' => 'ANTO', 'DOMISILI' => 'JAK-UT', 'JENIS_KELAMIN' => 'PRIA'],
+            ['ID_PELANGGAN' => 'PELANGGAN_6', 'NAMA' => 'BUJANG', 'DOMISILI' => 'JAK-BAR', 'JENIS_KELAMIN' => 'PRIA'],
+            ['ID_PELANGGAN' => 'PELANGGAN_7', 'NAMA' => 'JOWAN', 'DOMISILI' => 'JAK-SEL', 'JENIS_KELAMIN' => 'PRIA'],
+            ['ID_PELANGGAN' => 'PELANGGAN_8', 'NAMA' => 'SINTIA', 'DOMISILI' => 'JAK-TIM', 'JENIS_KELAMIN' => 'WANITA'],
+            ['ID_PELANGGAN' => 'PELANGGAN_9', 'NAMA' => 'BUTET', 'DOMISILI' => 'JAK-BAR', 'JENIS_KELAMIN' => 'WANITA'],
+            ['ID_PELANGGAN' => 'PELANGGAN_10', 'NAMA' => 'JONNY', 'DOMISILI' => 'JAK-SEL', 'JENIS_KELAMIN' => 'WANITA'],
         ];
 
         $barangs = [
@@ -39,16 +39,16 @@ class DataSeeder extends Seeder
         ];
 
         $penjualans = [
-            ['ID_NOTA' => 'NOTA_1', 'TGL' => '2018-01-01', 'KODE_PELANGGAN' => 'PELANGAN_1', 'SUBTOTAL' => 50000],
-            ['ID_NOTA' => 'NOTA_2', 'TGL' => '2018-01-01', 'KODE_PELANGGAN' => 'PELANGAN_2', 'SUBTOTAL' => 200000],
-            ['ID_NOTA' => 'NOTA_3', 'TGL' => '2018-01-01', 'KODE_PELANGGAN' => 'PELANGAN_3', 'SUBTOTAL' => 430000],
-            ['ID_NOTA' => 'NOTA_4', 'TGL' => '2018-01-02', 'KODE_PELANGGAN' => 'PELANGAN_7', 'SUBTOTAL' => 120000],
-            ['ID_NOTA' => 'NOTA_5', 'TGL' => '2018-01-02', 'KODE_PELANGGAN' => 'PELANGAN_4', 'SUBTOTAL' => 70000],
-            ['ID_NOTA' => 'NOTA_6', 'TGL' => '2018-01-03', 'KODE_PELANGGAN' => 'PELANGAN_8', 'SUBTOTAL' => 230000],
-            ['ID_NOTA' => 'NOTA_7', 'TGL' => '2018-01-03', 'KODE_PELANGGAN' => 'PELANGAN_9', 'SUBTOTAL' => 390000],
-            ['ID_NOTA' => 'NOTA_8', 'TGL' => '2018-01-03', 'KODE_PELANGGAN' => 'PELANGAN_5', 'SUBTOTAL' => 65000],
-            ['ID_NOTA' => 'NOTA_9', 'TGL' => '2018-01-04', 'KODE_PELANGGAN' => 'PELANGAN_2', 'SUBTOTAL' => 40000],
-            ['ID_NOTA' => 'NOTA_10', 'TGL' => '2018-01-04', 'KODE_PELANGGAN' => 'PELANGAN_1', 'SUBTOTAL' => 400000],
+            ['ID_NOTA' => 'NOTA_1', 'TGL' => '2018-01-01', 'KODE_PELANGGAN' => 'PELANGGAN_1', 'SUBTOTAL' => 50000],
+            ['ID_NOTA' => 'NOTA_2', 'TGL' => '2018-01-01', 'KODE_PELANGGAN' => 'PELANGGAN_2', 'SUBTOTAL' => 200000],
+            ['ID_NOTA' => 'NOTA_3', 'TGL' => '2018-01-01', 'KODE_PELANGGAN' => 'PELANGGAN_3', 'SUBTOTAL' => 430000],
+            ['ID_NOTA' => 'NOTA_4', 'TGL' => '2018-01-02', 'KODE_PELANGGAN' => 'PELANGGAN_7', 'SUBTOTAL' => 120000],
+            ['ID_NOTA' => 'NOTA_5', 'TGL' => '2018-01-02', 'KODE_PELANGGAN' => 'PELANGGAN_4', 'SUBTOTAL' => 70000],
+            ['ID_NOTA' => 'NOTA_6', 'TGL' => '2018-01-03', 'KODE_PELANGGAN' => 'PELANGGAN_8', 'SUBTOTAL' => 230000],
+            ['ID_NOTA' => 'NOTA_7', 'TGL' => '2018-01-03', 'KODE_PELANGGAN' => 'PELANGGAN_9', 'SUBTOTAL' => 390000],
+            ['ID_NOTA' => 'NOTA_8', 'TGL' => '2018-01-03', 'KODE_PELANGGAN' => 'PELANGGAN_5', 'SUBTOTAL' => 65000],
+            ['ID_NOTA' => 'NOTA_9', 'TGL' => '2018-01-04', 'KODE_PELANGGAN' => 'PELANGGAN_2', 'SUBTOTAL' => 40000],
+            ['ID_NOTA' => 'NOTA_10', 'TGL' => '2018-01-04', 'KODE_PELANGGAN' => 'PELANGGAN_1', 'SUBTOTAL' => 400000],
         ];
 
         $itemPenjualans = [
